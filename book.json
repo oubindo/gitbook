@@ -46,8 +46,7 @@
                 "pageview-count",
                 "popup",
                 "tbfed-pagefooter",
-                "todo",
-                "prism", "-highlight"
+                "-highlight"
                 ],
     "pluginsConfig": {
         "github": {"url": "https://github.com/oubindo"},
