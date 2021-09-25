@@ -1,0 +1,82 @@
+{
+    "author": "oubindo",
+    "description": "码上有为的编程人生",
+    "title": "码上有为",
+    "variables": {},
+    "extension": null,
+    "generator": "site",
+    "isbn": "",
+    "links": {
+        "sharing": {
+            "all": null,
+            "facebook": null,
+            "google": null,
+            "twitter": null,
+            "weibo": null
+        },
+        "sidebar": {
+            "码上有为公众号": "https://mp.weixin.qq.com/s/RnGl2FntihqrK0g2mb2aWw"
+        }
+    },
+    "output": null,
+    "pdf": {
+        "fontSize": 12,
+        "footerTemplate": null,
+        "headerTemplate": null,
+        "margin": {
+            "bottom": 36,
+            "left": 62,
+            "right": 62,
+            "top": 36
+        },
+        "pageNumbers": false,
+        "paperSize": "a4"
+    },
+    "plugins": ["chapter-fold",
+                "expandable-chapters-small",
+                "expandable-chapters",
+                "advanced-emoji",
+                "github",
+                "splitter",
+                "-sharing", "sharing-plus",
+                "simple-page-toc",
+                "copy-code-button",
+                "page-toc-button",
+                "klipse",
+                "pageview-count",
+                "popup",
+                "tbfed-pagefooter",
+                "todo",
+                "prism", "-highlight"
+                ],
+    "pluginsConfig": {
+        "github": {"url": "https://github.com/oubindo"},
+        "sharing": {
+                   "douban": true,
+                   "google": true,
+                   "twitter": true,
+                   "weibo": true,
+                   "all": [
+                       "google", "twitter", "weibo"
+                   ]
+               },
+        "simple-page-toc": {
+                "maxDepth": 3,
+                "skipFirstH1": true
+                },
+        "page-toc-button": {
+            "maxTocDepth": 3,
+            "minTocSize": 3
+           },
+        "tbfed-pagefooter": {
+                    "copyright":"",
+                    "modify_label": "该文件最后修改时间：",
+                    "modify_format": "YYYY-MM-DD HH:mm:ss"
+                },
+        "prism": {
+          "css": [
+            "prismjs/themes/prism-dracula.css"
+          ]
+        }
+    }
+}
