@@ -15,7 +15,7 @@
             "weibo": null
         },
         "sidebar": {
-            "码上有为公众号": "https://mp.weixin.qq.com/s/RnGl2FntihqrK0g2mb2aWw"
+            "公众号:码上有为": "https://mp.weixin.qq.com/s/RnGl2FntihqrK0g2mb2aWw"
         }
     },
     "output": null,
@@ -52,8 +52,8 @@
         "github": {"url": "https://github.com/oubindo"},
         "sharing": {
                    "douban": true,
-                   "google": true,
-                   "twitter": true,
+                   "google": false,
+                   "twitter": false,
                    "weibo": true,
                    "all": [
                        "google", "twitter", "weibo"
@@ -69,7 +69,7 @@
            },
         "tbfed-pagefooter": {
                     "copyright":"",
-                    "modify_label": "该文件最后修改时间：",
+                    "modify_label": "修改时间：",
                     "modify_format": "YYYY-MM-DD HH:mm:ss"
                 },
         "prism": {
