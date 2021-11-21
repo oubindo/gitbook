@@ -329,15 +329,6 @@ GET /bank/_search
 
 
 
-### 2.4 Mapping和Setting
-
-
-
-
-
-
-
-
 
 ## 3. 基本原理
 
@@ -439,33 +430,7 @@ shard = hash(routing) % number_of_primary_shards
 | work   |      | Y    |      |
 
 
-
-
-
-
-
-### 3.4 存储
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+剩下的待补充~
 
 
 

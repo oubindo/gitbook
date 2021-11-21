@@ -196,7 +196,7 @@ typedef struct zskiplist {
 
 先给一张跳跃表的示意图，我们边看示意图边分析结构。
 
-![img](https://raw.githubusercontent.com/oubindo/ImageBed/master/img/09c4bcae0e8647038fcadd43a7bf8fb1%7Etplv-k3u1fbpfcp-watermark.awebp)
+![img](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest/img/09c4bcae0e8647038fcadd43a7bf8fb1%7Etplv-k3u1fbpfcp-watermark.awebp)
 
 每个zskiplistNode都有几个关键属性：
 
@@ -277,11 +277,11 @@ contents数组中每个项在数组中按值的大小从小到大有序排列。
 
 压缩列表是为了节约内存而开发的，由一系列特殊编码的连续内存块组成的顺序型数据结构。可以包含任意多个节点，每个节点可以保存一个字节数组或者一个整数值。压缩列表的组成结构如下
 
-![image-20211024153703545](https://raw.githubusercontent.com/oubindo/ImageBed/master/img/image-20211024153703545.png)
+![image-20211024153703545](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest/img/image-20211024153703545.png)
 
 每个压缩列表节点可以保存一个字节数组或者一个整数值，每个节点都由previous_entry_length, encoding, content三个部分组成。
 
-![image-20211024173251489](https://raw.githubusercontent.com/oubindo/ImageBed/master/img/image-20211024173251489.png)
+![image-20211024173251489](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest/img/image-20211024173251489.png)
 
 但是这里要注意，content并不是真正意义上的模型参数，而是我们抽象出来的部分。我们可以看下数据模型，定义在ziplist.c里面
 
@@ -366,11 +366,11 @@ type属性记录了对象的类型，这个属性值可以是REDIS_STRING, REDIS
 
 encoding属性记录了对象所使用的的编码，也就是这个对象使用了什么数据结构作为对象的底层实现。这个值可以是下表的常量中的其中之一。
 
-![image-20211030094646350](https://raw.githubusercontent.com/oubindo/ImageBed/master/img/image-20211030094646350.png)
+![image-20211030094646350](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest/img/image-20211030094646350.png)
 
 每种类型的对象都至少使用了两种不同的编码。
 
-![image-20211030094817895](https://raw.githubusercontent.com/oubindo/ImageBed/master/img/image-20211030094817895.png)
+![image-20211030094817895](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest/img/image-20211030094817895.png)
 
 通过encoding属性来设定编码，而不是为特定类型的对象关联一种固定的编码，这样就可以根据不同的使用场景来设置不同的编码，极大的提升了Redis的灵活性和效率，优化了对象在某一场景下的效率。
 
@@ -688,7 +688,7 @@ Redis基于Reactor模式开发了自己的网络事件处理器，被称为文�
 
 文件事件处理器使用**IO多路复用程序**来同时监听多个套接字，并根据套接字目前执行的任务来关联不同的事件处理器。当被监听的套接字准备好执行连接应答、读取、写入、关闭等操作时，与操作相对应的文件事件就会产出。文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。
 
-![image-20211107163839054](https://raw.githubusercontent.com/oubindo/ImageBed/master/img/image-20211107163839054.png)
+![image-20211107163839054](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest/img/image-20211107163839054.png)
 
 尽管多个套接字可能会并发向IO多路复用程序发送文件事件，但是IO多路复用程序还是会串行给文件事件分派器发文件事件。
 
@@ -726,7 +726,7 @@ Redis服务器以周期性事件的方式来运行serverCron函数，在服务�
 
 服务器是这样处理文件事件和时间事件的：
 
-![image-20211110134856132](https://raw.githubusercontent.com/oubindo/ImageBed/master/img/image-20211110134856132.png)
+![image-20211110134856132](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest/img/image-20211110134856132.png)
 
 
 
@@ -947,7 +947,7 @@ typedef struct clusterState {
 
 握手的步骤为
 
-![image-20211113223335285](https://raw.githubusercontent.com/oubindo/ImageBed/master/img/image-20211113223335285.png)
+![image-20211113223335285](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest/img/image-20211113223335285.png)
 
 
 
@@ -959,7 +959,7 @@ Redis集群通过分片的方式来保存数据库中的键值对：集群的整
 
 **所以clusterState.slots数组记录16384个槽的分配情况，clusterNode.slots数组记录当前节点负责处理的槽。**
 
-![image-20211114111317559](https://raw.githubusercontent.com/oubindo/ImageBed/master/img/image-20211114111317559.png)
+![image-20211114111317559](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest/img/image-20211114111317559.png)
 
 如何计算键属于哪个槽呢？主要使用以下算法
 
@@ -1147,7 +1147,8 @@ Redis的事务和传统的关系型数据库事务的最大区别是：**Redis�
 
 
 
-
+## 参考
+《Redis设计与实现》
 
 
 
