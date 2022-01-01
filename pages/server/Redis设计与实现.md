@@ -1362,6 +1362,77 @@ Redis 的开发者 Antirez 提出了分布式锁算法 Redlock。Redlock 算法�
 
 
 
+### 6.11 Redis集群模式
+
+目前业界常见的有codis和RedisCluster模式
+
+1.Codis架构模式图：
+
+![image-20211206215608189](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest//img/image-20211206215608189.png)
+
+主要组件
+
+- dashboard
+     中心管理节点元信息
+     由外部存储（zk等）提供一致性保障
+     一个dashboard管理一个Redis集群
+
+- proxy
+     接入层，与Client直接交互
+      Golang实现，支持主流命令
+- server
+     对于开源Redis进行扩展，支持slot操作，迁移slot时，由主线程进行异步迁移
+
+主要特征
+
+- 扩展性
+     Slot 数量为1024，shard数量大几百后容易出现数据分布不均匀
+      数据迁移由dashboard主导，扩缩容比较强依赖dashboard
+      不支持多机房
+- 可用性
+    Proxy HA 无
+     Server HA 由redis-sentinel负责，相对来讲引入了一些运维复杂性
+     Server HA 不能暂停，例如升级Redis场景
+     机房级别容灾无
+  
+- 稳定性
+     扩缩容时数据迁移：在主线程进行迁移
+     AOF：不支持异步
+     弱网鲁棒性：与开源一致，较容易触发全量同步，影响稳定性
+     Proxy, 副本补齐功能无
+- 数据生态
+     订阅、备份、多活均无
+
+
+
+2.RedisCluster架构图
+
+![image-20211206215649068](https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest//img/image-20211206215649068.png)
+
+主要组件
+
+- Server
+     社区原生
+     Gossip协议网状互联
+- Proxy
+     可选 redis-proxy - 支持主流命令，prodution ready状态存疑，社区活跃度低
+     可选 twemproxy - 支持主流命令，较稳定，原生Twemproxy不支持redis-cluster
+
+主要特性
+
+- 扩展性
+     slot数量同alchemy，key粒度迁移
+     外围发起数据迁移
+     不支持多机房，需要依赖外围rcmirror等
+     规模较小，容易产生gossip网络风暴，内部使用限制在150分片
+- 可用性
+     HA 自治：Gossip + Vote =》 slave 自己提主
+     机房级别容灾无
+
+
+
+
+
 
 
 ## 参考

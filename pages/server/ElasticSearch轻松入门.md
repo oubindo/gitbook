@@ -71,11 +71,12 @@ ES提供了RESTful API来执行操作，请求的url需要遵循一定的格式�
 curl -X GET|PUT|HEAD|DELETE|POST http://localhost:9200/{cluster_name}/{type_name}/{document_name}
 ```
 
-这里面，curl -X、http://localhost:9200都是固定不变的，我们后面把这些省略掉，把一些核心操作统一列在下面。我们先列举下数据管理相关的命令
+这里面，curl -X、http://localhost:9200都是固定不变的，我们后面把这些省略掉，把一些核心操作统一列在下面。我们先列举下数据管理相关的命令，后面的命令都是kibana命令
 
 - 集群管理相关
 
   ``` 
+  
   // 查看集群状态
   GET /_cat/health?v
   
@@ -84,6 +85,7 @@ curl -X GET|PUT|HEAD|DELETE|POST http://localhost:9200/{cluster_name}/{type_name
   
   // 查看所有索引信息
   GET /_cat/indices?v
+  
   ```
 
 - 索引相关
@@ -98,7 +100,8 @@ curl -X GET|PUT|HEAD|DELETE|POST http://localhost:9200/{cluster_name}/{type_name
 
 - 文档相关
 
-  ```shell
+  ```
+  
   // 在索引中添加文档
   PUT /customer/doc/1
   {
@@ -419,7 +422,9 @@ shard = hash(routing) % number_of_primary_shards
 - Doc2: I love work。
 - Doc3: I love coding。
 
-正排索引就是通过Doc1来得到 I love China的结果。为了创建倒排索引，首先要通过分词器将每个文档的内容拆分成单独的词条。创建一个包含所有不重复词条的排序列表，然后列出每个词条出现在哪个文档。
+正排索引就是通过Doc1来得到 I love China的结果。而倒排索引就是通过China找到Doc1。
+
+为了创建倒排索引，首先要通过分词器将每个文档的内容拆分成单独的词条。创建一个包含所有不重复词条的排序列表，然后列出每个词条出现在哪个文档。
 
 | Term   | Doc1 | Doc2 | Doc3 |
 | :----- | :--- | :--- | :--- |
