@@ -135,7 +135,7 @@ curl -X GET|PUT|HEAD|DELETE|POST http://localhost:9200/{cluster_name}/{type_name
 
 假设我们在bank索引中有一些银行账户的数据，数据结构如下：
 
-```json
+```
 {
     "account_number": 0,
     "balance": 16623,
