@@ -85,7 +85,7 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="ElasticSearch轻松入门.html" />
+    <link rel="next" href="ElasticSearch快速入门.html" />
     
     
 
@@ -156,7 +156,7 @@
                 <span>
             
                     
-                    框架学习
+                    中间件
             
                 </span>
             
@@ -178,9 +178,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.1.2" data-path="ElasticSearch轻松入门.html">
+        <li class="chapter " data-level="1.2.1.2" data-path="ElasticSearch快速入门.html">
             
-                <a href="ElasticSearch轻松入门.html">
+                <a href="ElasticSearch快速入门.html">
             
                     
                     ElasticSearch轻松入门
@@ -1234,11 +1234,72 @@ if (r &lt; p) counter++;
 <li>min-slaves-to-write&#xFF1A;&#x8FD9;&#x4E2A;&#x914D;&#x7F6E;&#x9879;&#x8BBE;&#x7F6E;&#x4E86;&#x4E3B;&#x5E93;&#x80FD;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x540C;&#x6B65;&#x7684;&#x6700;&#x5C11;&#x4ECE;&#x5E93;&#x6570;&#x91CF;&#xFF1B;</li>
 <li>min-slaves-max-lag&#xFF1A;&#x8FD9;&#x4E2A;&#x914D;&#x7F6E;&#x9879;&#x8BBE;&#x7F6E;&#x4E86;&#x4E3B;&#x4ECE;&#x5E93;&#x95F4;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x590D;&#x5236;&#x65F6;&#xFF0C;&#x4ECE;&#x5E93;&#x7ED9;&#x4E3B;&#x5E93;&#x53D1;&#x9001; ACK &#x6D88;&#x606F;&#x7684;&#x6700;&#x5927;&#x5EF6;&#x8FDF;&#xFF08;&#x4EE5;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#xFF09;&#x3002;</li>
 </ul>
+<h3 id="611-redis&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;">6.11 Redis&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;</h3>
+<p>&#x76EE;&#x524D;&#x4E1A;&#x754C;&#x5E38;&#x89C1;&#x7684;&#x6709;codis&#x548C;RedisCluster&#x6A21;&#x5F0F;</p>
+<p>1.Codis&#x67B6;&#x6784;&#x6A21;&#x5F0F;&#x56FE;&#xFF1A;</p>
+<p><img src="https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest//img/image-20211206215608189.png" alt="image-20211206215608189"></p>
+<p>&#x4E3B;&#x8981;&#x7EC4;&#x4EF6;</p>
+<ul>
+<li><p>dashboard
+   &#x4E2D;&#x5FC3;&#x7BA1;&#x7406;&#x8282;&#x70B9;&#x5143;&#x4FE1;&#x606F;
+   &#x7531;&#x5916;&#x90E8;&#x5B58;&#x50A8;&#xFF08;zk&#x7B49;&#xFF09;&#x63D0;&#x4F9B;&#x4E00;&#x81F4;&#x6027;&#x4FDD;&#x969C;
+   &#x4E00;&#x4E2A;dashboard&#x7BA1;&#x7406;&#x4E00;&#x4E2A;Redis&#x96C6;&#x7FA4;</p>
+</li>
+<li><p>proxy
+   &#x63A5;&#x5165;&#x5C42;&#xFF0C;&#x4E0E;Client&#x76F4;&#x63A5;&#x4EA4;&#x4E92;</p>
+<pre><code>Golang&#x5B9E;&#x73B0;&#xFF0C;&#x652F;&#x6301;&#x4E3B;&#x6D41;&#x547D;&#x4EE4;
+</code></pre></li>
+<li>server
+   &#x5BF9;&#x4E8E;&#x5F00;&#x6E90;Redis&#x8FDB;&#x884C;&#x6269;&#x5C55;&#xFF0C;&#x652F;&#x6301;slot&#x64CD;&#x4F5C;&#xFF0C;&#x8FC1;&#x79FB;slot&#x65F6;&#xFF0C;&#x7531;&#x4E3B;&#x7EBF;&#x7A0B;&#x8FDB;&#x884C;&#x5F02;&#x6B65;&#x8FC1;&#x79FB;</li>
+</ul>
+<p>&#x4E3B;&#x8981;&#x7279;&#x5F81;</p>
+<ul>
+<li>&#x6269;&#x5C55;&#x6027;
+   Slot &#x6570;&#x91CF;&#x4E3A;1024&#xFF0C;shard&#x6570;&#x91CF;&#x5927;&#x51E0;&#x767E;&#x540E;&#x5BB9;&#x6613;&#x51FA;&#x73B0;&#x6570;&#x636E;&#x5206;&#x5E03;&#x4E0D;&#x5747;&#x5300;<pre><code>&#x6570;&#x636E;&#x8FC1;&#x79FB;&#x7531;dashboard&#x4E3B;&#x5BFC;&#xFF0C;&#x6269;&#x7F29;&#x5BB9;&#x6BD4;&#x8F83;&#x5F3A;&#x4F9D;&#x8D56;dashboard
+&#x4E0D;&#x652F;&#x6301;&#x591A;&#x673A;&#x623F;
+</code></pre></li>
+<li><p>&#x53EF;&#x7528;&#x6027;
+  Proxy HA &#x65E0;
+   Server HA &#x7531;redis-sentinel&#x8D1F;&#x8D23;&#xFF0C;&#x76F8;&#x5BF9;&#x6765;&#x8BB2;&#x5F15;&#x5165;&#x4E86;&#x4E00;&#x4E9B;&#x8FD0;&#x7EF4;&#x590D;&#x6742;&#x6027;
+   Server HA &#x4E0D;&#x80FD;&#x6682;&#x505C;&#xFF0C;&#x4F8B;&#x5982;&#x5347;&#x7EA7;Redis&#x573A;&#x666F;
+   &#x673A;&#x623F;&#x7EA7;&#x522B;&#x5BB9;&#x707E;&#x65E0;</p>
+</li>
+<li><p>&#x7A33;&#x5B9A;&#x6027;
+   &#x6269;&#x7F29;&#x5BB9;&#x65F6;&#x6570;&#x636E;&#x8FC1;&#x79FB;&#xFF1A;&#x5728;&#x4E3B;&#x7EBF;&#x7A0B;&#x8FDB;&#x884C;&#x8FC1;&#x79FB;
+   AOF&#xFF1A;&#x4E0D;&#x652F;&#x6301;&#x5F02;&#x6B65;
+   &#x5F31;&#x7F51;&#x9C81;&#x68D2;&#x6027;&#xFF1A;&#x4E0E;&#x5F00;&#x6E90;&#x4E00;&#x81F4;&#xFF0C;&#x8F83;&#x5BB9;&#x6613;&#x89E6;&#x53D1;&#x5168;&#x91CF;&#x540C;&#x6B65;&#xFF0C;&#x5F71;&#x54CD;&#x7A33;&#x5B9A;&#x6027;
+   Proxy, &#x526F;&#x672C;&#x8865;&#x9F50;&#x529F;&#x80FD;&#x65E0;</p>
+</li>
+<li>&#x6570;&#x636E;&#x751F;&#x6001;
+   &#x8BA2;&#x9605;&#x3001;&#x5907;&#x4EFD;&#x3001;&#x591A;&#x6D3B;&#x5747;&#x65E0;</li>
+</ul>
+<p>2.RedisCluster&#x67B6;&#x6784;&#x56FE;</p>
+<p><img src="https://cdn.jsdelivr.net/gh/oubindo/ImageBed@latest//img/image-20211206215649068.png" alt="image-20211206215649068"></p>
+<p>&#x4E3B;&#x8981;&#x7EC4;&#x4EF6;</p>
+<ul>
+<li>Server
+   &#x793E;&#x533A;&#x539F;&#x751F;
+   Gossip&#x534F;&#x8BAE;&#x7F51;&#x72B6;&#x4E92;&#x8054;</li>
+<li>Proxy
+   &#x53EF;&#x9009; redis-proxy - &#x652F;&#x6301;&#x4E3B;&#x6D41;&#x547D;&#x4EE4;&#xFF0C;prodution ready&#x72B6;&#x6001;&#x5B58;&#x7591;&#xFF0C;&#x793E;&#x533A;&#x6D3B;&#x8DC3;&#x5EA6;&#x4F4E;
+   &#x53EF;&#x9009; twemproxy - &#x652F;&#x6301;&#x4E3B;&#x6D41;&#x547D;&#x4EE4;&#xFF0C;&#x8F83;&#x7A33;&#x5B9A;&#xFF0C;&#x539F;&#x751F;Twemproxy&#x4E0D;&#x652F;&#x6301;redis-cluster</li>
+</ul>
+<p>&#x4E3B;&#x8981;&#x7279;&#x6027;</p>
+<ul>
+<li>&#x6269;&#x5C55;&#x6027;
+   slot&#x6570;&#x91CF;&#x540C;alchemy&#xFF0C;key&#x7C92;&#x5EA6;&#x8FC1;&#x79FB;
+   &#x5916;&#x56F4;&#x53D1;&#x8D77;&#x6570;&#x636E;&#x8FC1;&#x79FB;
+   &#x4E0D;&#x652F;&#x6301;&#x591A;&#x673A;&#x623F;&#xFF0C;&#x9700;&#x8981;&#x4F9D;&#x8D56;&#x5916;&#x56F4;rcmirror&#x7B49;
+   &#x89C4;&#x6A21;&#x8F83;&#x5C0F;&#xFF0C;&#x5BB9;&#x6613;&#x4EA7;&#x751F;gossip&#x7F51;&#x7EDC;&#x98CE;&#x66B4;&#xFF0C;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x9650;&#x5236;&#x5728;150&#x5206;&#x7247;</li>
+<li>&#x53EF;&#x7528;&#x6027;
+   HA &#x81EA;&#x6CBB;&#xFF1A;Gossip + Vote =&#x300B; slave &#x81EA;&#x5DF1;&#x63D0;&#x4E3B;
+   &#x673A;&#x623F;&#x7EA7;&#x522B;&#x5BB9;&#x707E;&#x65E0;</li>
+</ul>
 <h2 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h2>
 <p>&#x300A;Redis&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;&#x300B;</p>
 <p>&#x6781;&#x5BA2;&#x65F6;&#x95F4;&#x300A;Redis&#x6838;&#x5FC3;&#x6280;&#x672F;&#x4E0E;&#x5B9E;&#x6218;&#x300B;&#x8BFE;&#x7A0B;</p>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-12-05 17:29:26
+2021-12-12 13:49:27
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -1268,7 +1329,7 @@ if (r &lt; p) counter++;
             
                 
                 
-                <a href="ElasticSearch轻松入门.html" class="navigation navigation-next navigation-unique" aria-label="Next page: ElasticSearch轻松入门">
+                <a href="ElasticSearch快速入门.html" class="navigation navigation-next navigation-unique" aria-label="Next page: ElasticSearch轻松入门">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1279,7 +1340,7 @@ if (r &lt; p) counter++;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Redis的设计与实现","level":"1.2.1.1","depth":3,"next":{"title":"ElasticSearch轻松入门","level":"1.2.1.2","depth":3,"path":"pages/server/ElasticSearch轻松入门.md","ref":"pages/server/ElasticSearch轻松入门.md","articles":[]},"previous":{"title":"框架学习","level":"1.2.1","depth":2,"ref":"","articles":[{"title":"Redis的设计与实现","level":"1.2.1.1","depth":3,"path":"pages/server/Redis设计与实现.md","ref":"pages/server/Redis设计与实现.md","articles":[]},{"title":"ElasticSearch轻松入门","level":"1.2.1.2","depth":3,"path":"pages/server/ElasticSearch轻松入门.md","ref":"pages/server/ElasticSearch轻松入门.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","-highlight"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"github":{"url":"https://github.com/oubindo"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":false,"twitter":false,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"oubindo","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"码上有为","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"公众号:码上有为":"https://mp.weixin.qq.com/s/RnGl2FntihqrK0g2mb2aWw"}},"gitbook":"*","description":"码上有为的编程人生","extension":null},"file":{"path":"pages/server/Redis设计与实现.md","mtime":"2021-12-05T09:29:26.462Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-06T03:12:14.018Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Redis的设计与实现","level":"1.2.1.1","depth":3,"next":{"title":"ElasticSearch轻松入门","level":"1.2.1.2","depth":3,"path":"pages/server/ElasticSearch快速入门.md","ref":"pages/server/ElasticSearch快速入门.md","articles":[]},"previous":{"title":"中间件","level":"1.2.1","depth":2,"ref":"","articles":[{"title":"Redis的设计与实现","level":"1.2.1.1","depth":3,"path":"pages/server/Redis设计与实现.md","ref":"pages/server/Redis设计与实现.md","articles":[]},{"title":"ElasticSearch轻松入门","level":"1.2.1.2","depth":3,"path":"pages/server/ElasticSearch快速入门.md","ref":"pages/server/ElasticSearch快速入门.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","-highlight"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"github":{"url":"https://github.com/oubindo"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":false,"twitter":false,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"oubindo","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"码上有为","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"公众号:码上有为":"https://mp.weixin.qq.com/s/RnGl2FntihqrK0g2mb2aWw"}},"gitbook":"*","description":"码上有为的编程人生","extension":null},"file":{"path":"pages/server/Redis设计与实现.md","mtime":"2021-12-12T05:49:27.306Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-01-24T16:24:50.143Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
